@@ -29,20 +29,16 @@ while rval:
     # Faz a varredura na lista de faces detectadas em faces_return
     for (x,y,w,h) in faces_return:
         # Desenha um retangulo em cada face detectada
-        #img = cv2.rectangle(frame,(x,y),(x+w,y+h),(0,0,255),1)
-        img = frame
+        
+        img = frame.copy()
+
+        cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),1)
 
         # Aplica uma mascara no frame completo
-        #img[y:y+h, x:x+w] = cv2.medianBlur(img[y:y+h, x:x+w],35)
-
-        # Faz o mesmo crop da face com a imagem colorida
-        roi_color = frame[y:y+h, x:x+w]
-
-        # Aplica uma mascara no crop colorido
-        crop_blur = cv2.medianBlur(roi_color,35)
+        img[y:y+h, x:x+w] = cv2.medianBlur(img[y:y+h, x:x+w],35)
 
         # Exibe saida da imagem
-        cv2.imshow("result", crop_blur)
+        cv2.imshow("result", img)
 
 
     # Exibe saida da imagem
